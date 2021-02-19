@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>dev.misael</groupId>
 	<artifactId>todo-web-service</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 	<name>todo-web-service</name>
 	<description>Todo </description>
 	<properties>
