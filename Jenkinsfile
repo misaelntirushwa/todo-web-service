@@ -1,18 +1,27 @@
 pipeline {
-    agent any
+    agent {
+         dockerfile true
+    }
     stages {
         stage('Compile') {
             steps {
                 sh './mvnw clean compile'
             }
         }
-        stage('Build And Push Image') {
+        stage('Docker login') {
             environment {
-               DOCKERHUB_CREDS = credentials('dockerhub_id')
+                DOCKERHUB_CREDS = credentials('dockerhub_id')
             }
             steps {
-                sh './mvnw compile jib:build -Djib.to.auth.username=DOCKERHUB_CREDS_USR -Djib.to.auth.password=DOCKERHUB_CREDS_PSW'
+                sh 'docker login -u DOCKERHUB_CREDS_USR -p DOCKERHUB_CREDS_PSW'
             }
+        }
+        stage('Build And Push Image') {
+
+            steps {
+                sh './mvnw package'
+            }
+
         }
         stage('Test') {
             steps {
