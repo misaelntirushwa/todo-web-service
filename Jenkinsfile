@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build And Push Image') {
             steps {
-                sh './mvnw compile jib:dockerBuild'
+                sh './mvnw compile jib:build'
             }
         }
         stage('Test') {
